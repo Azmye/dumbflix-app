@@ -71,6 +71,8 @@ const App = () => {
             <Route path="/shows-details/:id" element={<DetailItem endpoint={'/tv/'} />} />
           </Route>
           <Route element={<PrivateRouteAdmin />}>
+            <Route path="/admin-movie-details/:id" element={<DetailItem endpoint={'/movie/'} />} />
+            <Route path="/admin-shows-details/:id" element={<DetailItem endpoint={'/tv/'} />} />
             <Route path="/admin-dashboard" element={<AdminHome />} />
             <Route path="/admin-form" element={<AdminForm />} />
             <Route path="/admin-transactions" element={<AdminTransactions />} />

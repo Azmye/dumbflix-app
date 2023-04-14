@@ -1,11 +1,21 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Hero from '../Components/Global/Hero';
 import heroImage from '../assets/img/main-bg.png';
 import MovieList from '../Components/Movies/MovieList';
 import ShowsList from '../Components/Shows/ShowsList';
+import { UserContext } from '../Context/UserContext';
+import { useNavigate } from 'react-router';
 
 const Home = () => {
   document.body.classList = 'bg-zinc-900';
+  const navigate = useNavigate();
+  const [userState, modalDispatch] = useContext(UserContext);
+
+  useEffect(() => {
+    if (userState.user.role === 'admin') {
+      navigate('/admin-dashboard');
+    }
+  });
   return (
     <React.Fragment>
       <Hero

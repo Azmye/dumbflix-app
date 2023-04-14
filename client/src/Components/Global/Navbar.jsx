@@ -8,6 +8,7 @@ import { UserContext } from '../../Context/UserContext';
 import { FaUser } from 'react-icons/fa';
 import UserDropdown from '../Modal/UserDropdown';
 import UserProfileUpdate from '../Modal/UserProfileUpdate';
+import AdminDropdown from '../Modal/AdminDropdown';
 
 const Navbar = () => {
   const [modalState, modalDispatch] = useContext(ModalContext);
@@ -19,11 +20,13 @@ const Navbar = () => {
       <nav className="fixed left-0 right-0 bg-zinc-900 text-white py-3 z-50">
         <div className="container px-8 mx-auto flex justify-between items-center relative">
           {/* Nav Links */}
-          <div className="flex gap-3 items-center text-white font-semibold">
-            <Link to={'/'}>Home</Link>
-            <Link to={'/shows'}>TV Shows</Link>
-            <Link to={'/movies'}>Movies</Link>
-          </div>
+          {userState.user.role === 'admin' ? null : (
+            <div className="flex gap-3 items-center text-white font-semibold">
+              <Link to={'/'}>Home</Link>
+              <Link to={'/shows'}>TV Shows</Link>
+              <Link to={'/movies'}>Movies</Link>
+            </div>
+          )}
 
           {/* Nav Brand */}
           <div>
@@ -49,7 +52,13 @@ const Navbar = () => {
             </div>
           )}
 
-          {userState.isLogin && isUserDropdown && (
+          {userState.user.role === 'admin' && isUserDropdown && (
+            <div onMouseLeave={() => setUserDropdown(false)} className={`absolute -right-1 mt-3 top-full`}>
+              <AdminDropdown />
+            </div>
+          )}
+
+          {userState.user.role === 'user' && isUserDropdown && (
             <div onMouseLeave={() => setUserDropdown(false)} className={`absolute -right-1 mt-3 top-full`}>
               <UserDropdown />
             </div>

@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import useFetch from '../Config/useFetch';
 import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import ApiConfig from '../Config/ApiConfig';
+import { UserContext } from '../Context/UserContext';
 
 const DetailsItem = (props) => {
   const { id } = useParams();
   const { data } = useFetch(`${props.endpoint}${id}`);
   const { tmdb_originalImage, tmdb_w500Image } = ApiConfig;
-
+  const [userState, userDispatch] = useContext(UserContext);
+  console.log(userState.user.role);
   return (
     <React.Fragment>
       <div className="pt-10 bg-black/60">
@@ -31,12 +33,14 @@ const DetailsItem = (props) => {
           ))}
       </div>
 
-      <div className="bg-black text-end container mx-auto px-8 pt-5 hidden">
-        <button className="bg-red-700 text-white px-8 py-2 rounded-md">Add Episode</button>
-      </div>
+      {userState.user.role === 'admin' ? (
+        <div className="bg-black text-end container mx-auto px-8 py-5">
+          <button className="bg-red-700 text-white px-8 py-2 rounded-md">Add Episode</button>
+        </div>
+      ) : null}
 
       <div className="bg-black">
-        <div className={`flex container justify-between mx-auto py-20 lg:px-8`}>
+        <div className={`flex container justify-between mx-auto lg:px-8 ${userState.user.role === 'admin' ? `pb-20` : `py-20`}`}>
           {data && (
             <div className="w-1/2 flex gap-x-8">
               <div className="w-1/3">{data && <img src={`${tmdb_w500Image(data.data.poster_path)}`} alt="" />}</div>

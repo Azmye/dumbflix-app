@@ -62,7 +62,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="w-1/3 flex flex-col justify-between">
-            <img src={`http://localhost:5000/uploads/${userState.user?.Thumbnail}`} alt="" className="w-full h-full object-cover rounded-sm" />
+            <img src={`http://localhost:5000/uploads/${userState.user?.thumbnail}`} alt="" className="w-full h-full object-cover rounded-sm" />
             <button onClick={() => modalDispatch({ type: 'PROFILE_UPDATE_MODAL' })} className="w-full bg-red-700 text-white mt-2 rounded-md py-2">
               Update Profile
             </button>
