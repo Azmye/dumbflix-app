@@ -11,6 +11,7 @@ import { ModalContext } from '../Context/ModalContext';
 const Profile = () => {
   const [userState, _] = useContext(UserContext);
   const [modalState, modalDispatch] = useContext(ModalContext);
+  console.log(userState);
   return (
     <div className="w-full pt-36">
       <div className="w-5/12 mx-auto bg-zinc-900 p-5 rounded-md">

@@ -9,6 +9,7 @@ import { FaUser } from 'react-icons/fa';
 import UserDropdown from '../Modal/UserDropdown';
 import UserProfileUpdate from '../Modal/UserProfileUpdate';
 import AdminDropdown from '../Modal/AdminDropdown';
+import FormCategory from '../Modal/FormCategory';
 
 const Navbar = () => {
   const [modalState, modalDispatch] = useContext(ModalContext);
@@ -86,6 +87,14 @@ const Navbar = () => {
         <div className="relative w-full z-50 flex justify-center">
           <div onClick={() => modalDispatch({ type: 'CLOSE_AUTH_MODAL' })} className="absolute w-full h-[200vh] bg-zinc-900/60"></div>
           <UserProfileUpdate className={`absolute w-96 bg-zinc-900 mt-32 p-8 rounded-md`} />
+        </div>
+      )}
+
+      {/* Add Category Modal */}
+      {modalState.isFormCategory && (
+        <div className="relative w-full z-50 flex justify-center">
+          <div onClick={() => modalDispatch({ type: 'CLOSE_AUTH_MODAL' })} className="absolute w-full h-[200vh] bg-zinc-900/60"></div>
+          <FormCategory className={`absolute w-96 bg-zinc-900 mt-32 p-8 rounded-md`} />
         </div>
       )}
     </React.Fragment>

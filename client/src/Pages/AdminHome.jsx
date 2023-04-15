@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ShowsList from '../Components/Shows/ShowsList';
 import MovieList from '../Components/Movies/MovieList';
 import { useNavigate } from 'react-router';
+import { ModalContext } from '../Context/ModalContext';
 
 const AdminHome = () => {
   const [category, setCategory] = useState(false);
+  const [_, modalDispatch] = useContext(ModalContext);
   const navigate = useNavigate();
 
   const handleOnChange = (e) => {
@@ -27,6 +29,12 @@ const AdminHome = () => {
             <option value="movie">Movie</option>
             <option value="shows">TV Shows</option>
           </select>
+
+          <div className="px-3">
+            <button onClick={() => modalDispatch({ type: 'FORM_CATEGORY_MODAL' })} className="text-red-700 bg-red-700/10 rounded-md">
+              +Category
+            </button>
+          </div>
         </div>
 
         <button onClick={() => navigate('/admin-form')} className="px-8 py-2 bg-red-700 text-white rounded-md">

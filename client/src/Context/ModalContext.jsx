@@ -6,6 +6,7 @@ const initialState = {
   isLoginModal: false,
   isRegisterModal: false,
   isProfileModal: false,
+  isFormCategory: false,
 };
 
 const reducer = (state, action) => {
@@ -16,6 +17,10 @@ const reducer = (state, action) => {
       return {
         isLoginModal: true,
         isRegisterModal: false,
+      };
+    case 'FORM_CATEGORY_MODAL':
+      return {
+        isFormCategory: true,
       };
     case 'PROFILE_UPDATE_MODAL':
       return {
@@ -31,6 +36,7 @@ const reducer = (state, action) => {
         isLoginModal: false,
         isRegisterModal: false,
         isProfileModal: false,
+        isFormCategory: false,
       };
     default:
       throw new Error();
