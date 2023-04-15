@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { UserContext } from '../../Context/UserContext';
 import { ModalContext } from '../../Context/ModalContext';
-import { Navigate, Outlet } from 'react-router';
+import { Navigate, Outlet } from 'react-router-dom';
 
 export const PrivateRouteLogin = () => {
   const [userState] = useContext(UserContext);

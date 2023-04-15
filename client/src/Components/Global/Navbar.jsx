@@ -10,11 +10,12 @@ import UserDropdown from '../Modal/UserDropdown';
 import UserProfileUpdate from '../Modal/UserProfileUpdate';
 import AdminDropdown from '../Modal/AdminDropdown';
 import FormCategory from '../Modal/FormCategory';
+import AddEpisode from '../Modal/AddEpisode';
 
 const Navbar = () => {
   const [modalState, modalDispatch] = useContext(ModalContext);
   const [userState, _] = useContext(UserContext);
-  const [isUserDropdown, setUserDropdown] = useState();
+  const [isUserDropdown, setUserDropdown] = useState(false);
 
   return (
     <React.Fragment>
@@ -95,6 +96,14 @@ const Navbar = () => {
         <div className="relative w-full z-50 flex justify-center">
           <div onClick={() => modalDispatch({ type: 'CLOSE_AUTH_MODAL' })} className="absolute w-full h-[200vh] bg-zinc-900/60"></div>
           <FormCategory className={`absolute w-96 bg-zinc-900 mt-32 p-8 rounded-md`} />
+        </div>
+      )}
+
+      {/* Add Episode Modal */}
+      {userState.user.role === 'admin' && modalState.isAddEpisode && (
+        <div className="relative w-full z-50 flex justify-center">
+          <div onClick={() => modalDispatch({ type: 'CLOSE_AUTH_MODAL' })} className="absolute w-full h-[200vh] bg-zinc-900/60"></div>
+          <AddEpisode className={`absolute w-1/2 bg-zinc-900 mt-32 p-8 rounded-md`} />
         </div>
       )}
     </React.Fragment>

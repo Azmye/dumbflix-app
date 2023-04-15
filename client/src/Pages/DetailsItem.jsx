@@ -4,13 +4,15 @@ import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import ApiConfig from '../Config/ApiConfig';
 import { UserContext } from '../Context/UserContext';
+import { ModalContext } from '../Context/ModalContext';
 
 const DetailsItem = (props) => {
   const { id } = useParams();
   const { data } = useFetch(`${props.endpoint}${id}`);
   const { tmdb_originalImage, tmdb_w500Image } = ApiConfig;
   const [userState, userDispatch] = useContext(UserContext);
-  console.log(userState.user.role);
+
+  const [modalState, modalDispatch] = useContext(ModalContext);
   return (
     <React.Fragment>
       <div className="pt-10 bg-black/60">
@@ -35,7 +37,9 @@ const DetailsItem = (props) => {
 
       {userState.user.role === 'admin' ? (
         <div className="bg-black text-end container mx-auto px-8 py-5">
-          <button className="bg-red-700 text-white px-8 py-2 rounded-md">Add Episode</button>
+          <button onClick={() => modalDispatch({ type: 'ADD_EPISODE_MODAL' })} className="bg-red-700 text-white px-8 py-2 rounded-md">
+            Add Episode
+          </button>
         </div>
       ) : null}
 

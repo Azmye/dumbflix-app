@@ -7,6 +7,7 @@ const initialState = {
   isRegisterModal: false,
   isProfileModal: false,
   isFormCategory: false,
+  isAddEpisode: false,
 };
 
 const reducer = (state, action) => {
@@ -21,6 +22,10 @@ const reducer = (state, action) => {
     case 'FORM_CATEGORY_MODAL':
       return {
         isFormCategory: true,
+      };
+    case 'ADD_EPISODE_MODAL':
+      return {
+        isAddEpisode: true,
       };
     case 'PROFILE_UPDATE_MODAL':
       return {
@@ -37,6 +42,7 @@ const reducer = (state, action) => {
         isRegisterModal: false,
         isProfileModal: false,
         isFormCategory: false,
+        isAddEpisode: false,
       };
     default:
       throw new Error();
