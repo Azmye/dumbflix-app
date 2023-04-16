@@ -7,11 +7,12 @@ import Shows from './Pages/Shows';
 import DetailItem from './Pages/DetailsItem';
 import Profile from './Pages/Profile';
 import AdminHome from './Pages/AdminHome';
-import AdminForm from './Pages/AdminForm';
 import AdminTransactions from './Pages/AdminTransactions';
 import { PrivateRouteAdmin, PrivateRouteLogin, PrivateRouteUser } from './Components/PrivateRoute/PrivateRoutes';
 import { UserContext } from './Context/UserContext';
 import { API, setAuthToken } from './Config/Api';
+import AdminAddMovie from './Pages/AdminAddMovie';
+import Payment from './Pages/Payment';
 
 const App = () => {
   let navigate = useNavigate();
@@ -69,12 +70,13 @@ const App = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/movie-details/:id" element={<DetailItem endpoint={'/movie/'} />} />
             <Route path="/shows-details/:id" element={<DetailItem endpoint={'/tv/'} />} />
+            <Route path="user-payment" element={<Payment />} />
           </Route>
           <Route element={<PrivateRouteAdmin />}>
             <Route path="/admin-movie-details/:id" element={<DetailItem endpoint={'/movie/'} />} />
             <Route path="/admin-shows-details/:id" element={<DetailItem endpoint={'/tv/'} />} />
             <Route path="/admin-dashboard" element={<AdminHome />} />
-            <Route path="/admin-form" element={<AdminForm />} />
+            <Route path="/admin-form" element={<AdminAddMovie />} />
             <Route path="/admin-transactions" element={<AdminTransactions />} />
           </Route>
         </Route>

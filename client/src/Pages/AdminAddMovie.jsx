@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { API } from '../Config/Api';
+import { AlertError, AlertSuccess } from '../Components/Modal/AlertCollection';
+import { useNavigate } from 'react-router';
 
-const AdminForm = () => {
+const AdminAddMovie = () => {
+  const navigate = useNavigate();
   const [preview, setPreview] = useState(null);
+  const [message, setMessage] = useState(null);
   const [form, setForm] = useState({
     title: '',
     year: '',
@@ -28,7 +32,6 @@ const AdminForm = () => {
     try {
       e.preventDefault();
 
-      console.log(form);
       const config = {
         headers: {
           'Content-type': 'multipart/form-data',
@@ -44,15 +47,18 @@ const AdminForm = () => {
 
       const response = await API.post('/movie', formData, config);
       console.log('add movie success', response);
+      setMessage(<AlertSuccess message="Success add film" />);
+      navigate('/admin-dashboard');
     } catch (err) {
       e.preventDefault();
       console.log('add movie failed', err);
-      console.log(form);
+      setMessage(<AlertError message="Failed to add film" />);
     }
   });
 
   return (
     <div className="bg-black container mx-auto pt-28  px-44 h-[100vh]">
+      {message && message}
       <h2 className="font-bold text-lg text-white mb-5">Add Movie</h2>
       <form onSubmit={(e) => handleOnSubmit.mutate(e)}>
         <div className=" flex gap-3">
@@ -80,4 +86,4 @@ const AdminForm = () => {
   );
 };
 
-export default AdminForm;
+export default AdminAddMovie;

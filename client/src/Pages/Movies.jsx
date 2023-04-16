@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import MovieList from '../Components/Movies/MovieList';
 import heroImage from '../assets/img/movies-bg.png';
 import Hero from '../Components/Global/Hero';
+import { useNavigate } from 'react-router';
+import { UserContext } from '../Context/UserContext';
 
 const Movies = () => {
+  const navigate = useNavigate();
+  const [userState, modalDispatch] = useContext(UserContext);
+
+  useEffect(() => {
+    if (userState.user.role === 'admin') {
+      navigate('/admin-dashboard');
+    }
+  });
   return (
     <React.Fragment>
       <Hero

@@ -5,10 +5,9 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 export const PrivateRouteLogin = () => {
   const [userState] = useContext(UserContext);
-  const [_, modalDispatch] = useContext(ModalContext);
 
   if (!userState.isLogin) {
-    return <Navigate to={'/'} />;
+    return <Navigate to="/" />;
   }
 
   return <Outlet />;

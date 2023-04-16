@@ -3,9 +3,11 @@ import ShowsList from '../Components/Shows/ShowsList';
 import MovieList from '../Components/Movies/MovieList';
 import { useNavigate } from 'react-router';
 import { ModalContext } from '../Context/ModalContext';
+import { useQuery } from 'react-query';
+import { API } from '../Config/Api';
 
 const AdminHome = () => {
-  const [category, setCategory] = useState(false);
+  const [category, setCategory] = useState(true);
   const [_, modalDispatch] = useContext(ModalContext);
   const navigate = useNavigate();
 

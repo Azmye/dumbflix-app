@@ -2,10 +2,6 @@ import { useContext, useState } from 'react';
 import { BsGenderAmbiguous } from 'react-icons/bs';
 import { FaCreditCard, FaEnvelope, FaLocationArrow, FaPhone, FaUserCircle } from 'react-icons/fa';
 import { UserContext } from '../Context/UserContext';
-import { useMutation } from 'react-query';
-import { API } from '../Config/Api';
-import { AlertError, AlertSuccess } from '../Components/Modal/AlertCollection';
-import UserProfileUpdate from '../Components/Modal/UserProfileUpdate';
 import { ModalContext } from '../Context/ModalContext';
 
 const Profile = () => {

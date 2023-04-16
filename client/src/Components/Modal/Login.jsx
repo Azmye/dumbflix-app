@@ -44,7 +44,7 @@ const Login = (props) => {
         type: 'CLOSE_AUTH_MODAL',
       });
 
-      setAuthToken(localStorage.token);
+      setAuthToken(response.data.data.token);
 
       // status check
       if (response.data.data.role === 'admin') {
@@ -58,14 +58,6 @@ const Login = (props) => {
       setMessage(<AlertError message="Failed to login" />);
     }
   });
-
-  // const handleOnClick = (e) => {
-  //   e.preventDefault();
-
-  //   modalDispatch({
-  //     type: 'CLOSE_AUTH_MODAL',
-  //   });
-  // };
 
   return (
     <div className={`${props.className}`}>

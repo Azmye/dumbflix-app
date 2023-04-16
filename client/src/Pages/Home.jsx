@@ -15,7 +15,7 @@ const Home = () => {
     if (userState.user.role === 'admin') {
       navigate('/admin-dashboard');
     }
-  });
+  }, []);
   return (
     <React.Fragment>
       <Hero
