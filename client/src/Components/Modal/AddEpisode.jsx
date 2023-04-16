@@ -14,7 +14,7 @@ const AddEpisode = (props) => {
     movie_id: '',
   });
 
-  let { data: movies, refetch } = useQuery('moviesCache', async () => {
+  let { data: movies } = useQuery('movies', async () => {
     const response = await API.get('/movies');
     return response.data.data;
   });
@@ -59,9 +59,9 @@ const AddEpisode = (props) => {
           <input onChange={handleOnChange} className="w-3/4 mb-3 rounded-md p-2 placeholder-white border-2 border-white bg-zinc-500 focus:outline-none" type="text" name="title" placeholder="Title" />
           <input onChange={handleOnChange} className="w-1/4 mb-3 rounded-md p-2 placeholder-white border-2 border-white bg-zinc-500 focus:outline-none file-input-ghost file:text-white" type="file" name="thumbnail" id="" />
         </div>
-        <select onChange={handleOnChange} value={form.movie_id} name="movie_id" className="mb-3 border border-white rounded-md py-1 px-3 bg-zinc-700 w-full">
+        <select onChange={handleOnChange} value={form.movie_id} name="movie_id" className="mb-3 border border-white rounded-md py-1 px-3 bg-zinc-500 w-full">
           <option className="hidden" value={'default'}>
-            Category
+            Movies
           </option>
           {movies?.map((index, id) => (
             <option key={id} value={index?.id}>

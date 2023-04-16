@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import useFetch from '../Config/useFetch';
 import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
@@ -21,8 +21,16 @@ const DetailsItem = (props) => {
     const response = await API.get(`${props.endpoint}${id}`);
     return response.data.data;
   });
-  console.log(`${props.endpoint}${id}`);
-  console.log(movie);
+
+  const { data: episode } = useQuery('episodeCache', async () => {
+    const response = await API.get(`/movie/${id}/episodes`);
+    return response.data.data;
+  });
+
+  useEffect(() => {
+    console.log(episode.map((index) => index.thumbnail));
+  }, [episode]);
+
   return (
     <React.Fragment>
       <div className="pt-10 bg-black/60">
@@ -33,7 +41,7 @@ const DetailsItem = (props) => {
             height={'100%'}
             light={
               <div className="px-40 h-[500px]">
-                <img className="w-full h-[500px] mx-auto" src={placeholderThumb} />
+                <img className="w-full h-[500px] mx-auto" src={episode ? `${episode.thumbnail}` : placeholderThumb} />
               </div>
             }
             controls={true}

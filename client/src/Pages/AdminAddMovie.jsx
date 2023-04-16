@@ -23,10 +23,12 @@ const AdminAddMovie = () => {
     });
   };
 
-  let { data: categories, refetch } = useQuery('categoriesCache', async () => {
+  let { data: categories } = useQuery('categoriesCache', async () => {
     const response = await API.get('/category');
     return response.data.data;
   });
+
+  console.log(categories);
 
   const handleOnSubmit = useMutation(async (e) => {
     try {
