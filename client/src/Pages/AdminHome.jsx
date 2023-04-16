@@ -21,7 +21,7 @@ const AdminHome = () => {
 
   return (
     <React.Fragment>
-      <div className="flex justify-between px-8 pt-24 bg-black">
+      <div className="flex justify-between px-8 pt-24 bg-black  ">
         <div className="flex items-center">
           <h2 className="text-white text-lg font-semibold pr-5">List Movie</h2>
           <select className="bg-transparent border-2 rounded-md font-semibold" onChange={handleOnChange}>
