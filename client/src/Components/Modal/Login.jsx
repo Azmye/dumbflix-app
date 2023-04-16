@@ -55,7 +55,7 @@ const Login = (props) => {
 
       setMessage(<AlertSuccess message="Login Success" />);
     } catch (err) {
-      setMessage(<AlertError message="Failed to login" />);
+      setMessage(<AlertError message="Failed To Login" />);
     }
   });
 
