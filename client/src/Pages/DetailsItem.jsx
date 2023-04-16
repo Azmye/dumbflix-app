@@ -16,20 +16,21 @@ const DetailsItem = (props) => {
   const [userState, userDispatch] = useContext(UserContext);
   const [modalState, modalDispatch] = useContext(ModalContext);
   const [urlVideo, setUrlVideo] = useState(null);
+  const [episode, setEpisode] = useState(null);
 
-  const { data: movie } = useQuery('moviesCache', async () => {
+  const { data: movie } = useQuery('moviesDetailCache', async () => {
     const response = await API.get(`${props.endpoint}${id}`);
     return response.data.data;
   });
 
-  const { data: episode } = useQuery('episodeCache', async () => {
+  const { data: episodes } = useQuery('episodeDetailCache', async () => {
     const response = await API.get(`/movie/${id}/episodes`);
     return response.data.data;
   });
 
   useEffect(() => {
-    console.log(episode.map((index) => index.thumbnail));
-  }, [episode]);
+    episodes?.map((index) => setEpisode(index));
+  }, [episodes]);
 
   return (
     <React.Fragment>
@@ -41,20 +42,22 @@ const DetailsItem = (props) => {
             height={'100%'}
             light={
               <div className="px-40 h-[500px]">
-                <img className="w-full h-[500px] mx-auto" src={episode ? `${episode.thumbnail}` : placeholderThumb} />
+                <img className="w-full h-[500px] mx-auto" src={episode ? episode.thumbnail : placeholderThumb} />
               </div>
             }
             controls={true}
-            url={`${urlVideo ? 'https://www.youtube.com/watch?v=${index.key}' : null}`}
+            url={`${episode ? episode.video_link : null}`}
           />
         </div>
       </div>
 
       {userState.user.role === 'admin' ? (
         <div className="bg-black text-end container mx-auto px-8 py-5">
-          <button onClick={() => modalDispatch({ type: 'ADD_EPISODE_MODAL' })} className="bg-red-700 text-white px-8 py-2 rounded-md">
+          <button onClick={() => modalDispatch({ type: 'ADD_EPISODE_MODAL' })} className="bg-green-700 text-white px-8 py-2 rounded-md">
             Add Episode
           </button>
+
+          <button className="ml-5 bg-red-700 text-white px-8 py-2 rounded-md">Delete Movie</button>
         </div>
       ) : null}
 
@@ -74,7 +77,7 @@ const DetailsItem = (props) => {
             </div>
           </div>
           <div className="w-1/2 mx-auto pl-28">
-            <img className="rounded-md object-cover w-full h-[330px]" src={`${urlVideo != null ? null : placeholderThumb}`} alt="" />
+            <img className="rounded-md object-cover w-full h-[330px]" src={episode ? episode.thumbnail : placeholderThumb} alt="" />
             <h3>{movie?.title}</h3>
           </div>
         </div>

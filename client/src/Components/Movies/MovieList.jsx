@@ -11,16 +11,18 @@ const MovieList = (props) => {
     data: movies,
     refetch,
     isLoading,
-  } = useQuery('movies', async () => {
+  } = useQuery('moviesListCache', async () => {
     const response = await API.get('/movies');
     return response.data.data;
   });
 
   useEffect(() => {
-    setData(movies?.filter((index) => index.category.name == 'Movies'));
-  }, [movies]);
+    if (!isLoading) {
+      setData(movies?.filter((index) => index.category.name == 'Movies'));
+    }
+  }, [isLoading]);
 
-  return (
+  return isLoading ? null : (
     <div className={`${props.className} ${props.topComp ? 'bg-gradient-to-b from-black via-black to-zinc-900' : 'bg-zinc-900'} text-white `}>
       <div className="container mx-auto lg:px-8">
         <h2 className="font-semibold text-xl mb-5">Movies</h2>

@@ -14,7 +14,7 @@ const ShowsList = (props) => {
     data: shows,
     refetch,
     isLoading,
-  } = useQuery('moviesCache', async () => {
+  } = useQuery('moviesShowListCache', async () => {
     const response = await API.get('/movies');
     return response.data.data;
   });
