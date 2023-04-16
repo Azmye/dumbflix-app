@@ -11,6 +11,7 @@ import UserProfileUpdate from '../Modal/UserProfileUpdate';
 import AdminDropdown from '../Modal/AdminDropdown';
 import FormCategory from '../Modal/FormCategory';
 import AddEpisode from '../Modal/AddEpisode';
+import DeleteConfirmation from '../Modal/DeleteConfirmation';
 
 const Navbar = () => {
   const [modalState, modalDispatch] = useContext(ModalContext);
@@ -104,6 +105,14 @@ const Navbar = () => {
         <div className="relative w-full z-50 flex justify-center">
           <div onClick={() => modalDispatch({ type: 'CLOSE_AUTH_MODAL' })} className="absolute w-full h-[200vh] bg-zinc-900/60"></div>
           <AddEpisode className={`absolute w-1/2 bg-zinc-900 mt-32 p-8 rounded-md`} />
+        </div>
+      )}
+
+      {/* Delete Confirmation */}
+      {userState.user.role === 'admin' && modalState.isDeleteConfirmation && (
+        <div className="relative w-full z-50 flex justify-center">
+          <div onClick={() => modalDispatch({ type: 'CLOSE_AUTH_MODAL' })} className="absolute w-full h-[200vh] bg-zinc-900/60"></div>
+          <DeleteConfirmation className={`absolute w-1/2 bg-zinc-900 mt-32 p-8 rounded-md`} />
         </div>
       )}
     </React.Fragment>

@@ -18,7 +18,7 @@ const DetailsItem = (props) => {
   const [urlVideo, setUrlVideo] = useState(null);
   const [episode, setEpisode] = useState(null);
 
-  const { data: movie } = useQuery('moviesDetailCache', async () => {
+  const { data: movie } = useQuery(' ', async () => {
     const response = await API.get(`${props.endpoint}${id}`);
     return response.data.data;
   });
@@ -57,7 +57,9 @@ const DetailsItem = (props) => {
             Add Episode
           </button>
 
-          <button className="ml-5 bg-red-700 text-white px-8 py-2 rounded-md">Delete Movie</button>
+          <button onClick={() => modalDispatch({ type: 'DELETE_CONFIRMATION_MODAL' })} className="ml-5 bg-red-700 text-white px-8 py-2 rounded-md">
+            Delete Movie
+          </button>
         </div>
       ) : null}
 

@@ -8,6 +8,7 @@ const initialState = {
   isProfileModal: false,
   isFormCategory: false,
   isAddEpisode: false,
+  isDeleteConfirmation: false,
 };
 
 const reducer = (state, action) => {
@@ -18,6 +19,10 @@ const reducer = (state, action) => {
       return {
         isLoginModal: true,
         isRegisterModal: false,
+      };
+    case 'DELETE_CONFIRMATION_MODAL':
+      return {
+        isDeleteConfirmation: true,
       };
     case 'FORM_CATEGORY_MODAL':
       return {
@@ -43,6 +48,7 @@ const reducer = (state, action) => {
         isProfileModal: false,
         isFormCategory: false,
         isAddEpisode: false,
+        isDeleteConfirmation: false,
       };
     default:
       throw new Error();
